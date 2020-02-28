@@ -8,6 +8,8 @@ services:
       - traefik.enable=true
       - traefik.port=80
       - traefik.frontend.rule=Host:simple.demo.wbitt.com
+    volumes:
+      - ${PWD}/site.conf:/config/site.conf
 
     networks:
       # This uses the proxy-net / services-network
