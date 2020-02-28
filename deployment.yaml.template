@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simplesite-deployment
+  labels:
+    app: simplesite
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simplesite
+  template:
+    metadata:
+      labels:
+        app: simplesite
+    spec:
+      volumes:
+      - name: vol-simplesite-conf
+        configMap:
+          name: configmap-simplesite-conf
+      containers:
+      - name: simplesite
+        image: eu.gcr.io/<GCP-PROJECT-ID>/simplesite:SHORT_HASH
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: "/config/"
+          name: vol-simplesite-conf
+
