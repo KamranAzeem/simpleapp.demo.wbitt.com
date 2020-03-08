@@ -11,6 +11,9 @@ services:
     volumes:
       - ${PWD}/site.conf:/config/site.conf
 
+    env_file:
+    - simple-site.env
+
     networks:
       # This uses the proxy-net / services-network
       - services-network

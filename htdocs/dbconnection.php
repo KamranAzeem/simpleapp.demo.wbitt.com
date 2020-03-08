@@ -1,10 +1,10 @@
 <?php 
 
-// This file /script expects 'DB_*'  ENV variables defined in the OS environment.
+// This file /script expects 'MYSQL_*'  ENV variables defined in the OS environment.
 
 echo '<h1>Simple PHP application! </h1>'; 
 
-echo "This file /script expects 'DB_*'  ENV variables defined in the OS environment."  . PHP_EOL . "<br>";
+echo "This file /script expects 'MYSQL_*'  ENV variables defined in the OS environment."  . PHP_EOL . "<br>";
 echo "If you have not defined them, then you will see errors below." . PHP_EOL . "<br>";
 
 // Note: we are not defining any variables in this file. 
@@ -12,26 +12,34 @@ echo "If you have not defined them, then you will see errors below." . PHP_EOL .
 // We can perform checks to see if any of the expected variables are empty.
 
 // Enable following four lines only for debugging connection problems:
-// echo "DB_SERVER: " . $_ENV["DB_SERVER"] . "<br>";
-// echo "DB_USER: " . $_ENV["DB_USER"] . "<br>";
-// echo "DB_PASSWORD: " . $_ENV["DB_PASSWORD"] . "<br>";
-// echo "DB_NAME: " . $_ENV["DB_NAME"] . "<br>";
+// echo "MYSQL_HOST: " . $_ENV["MYSQL_HOST"] . "<br>";
+// echo "MYSQL_USER: " . $_ENV["MYSQL_USER"] . "<br>";
+// echo "MYSQL_PASSWORD: " . $_ENV["MYSQL_PASSWORD"] . "<br>";
+// echo "MYSQL_DATABASE: " . $_ENV["MYSQL_DATABASE"] . "<br>";
 
 
 // Establish DB connection:
-$link = mysqli_connect($_ENV["DB_SERVER"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"], $_ENV["DB_NAME"]);
+$link = mysqli_connect($_ENV["MYSQL_HOST"], $_ENV["MYSQL_USER"], $_ENV["MYSQL_PASSWORD"], $_ENV["MYSQL_DATABASE"]);
 
 // Check if it works:
 
 if (!$link) {
-    echo "Error: Unable to connect to MySQL." . PHP_EOL . "<br>";
+    echo "Error: Unable to connect to MySQL using the credentials provided as MYSQL_* environment variables." . PHP_EOL . "<br>";
     echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL . "<br>";
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL . "<br>";
     exit;
 }
 
-echo "Success: A proper connection to MySQL was made successfully! " . PHP_EOL . "<br>";
+echo "Success: Connected to MySQL server, using the credentials provided as MYSQL_* environment variables!" . PHP_EOL . "<br>";
 echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL . "<br>";
+
+// Enable the following to show extra information on the web page:
+// echo "The following information was used for this connection:" . PHP_EOL . "<br>";
+// echo "MYSQL_HOST: " . $_ENV["MYSQL_HOST"] . "<br>";
+// echo "MYSQL_USER: " . $_ENV["MYSQL_USER"] . "<br>";
+// echo "MYSQL_PASSWORD: " . $_ENV["MYSQL_PASSWORD"] . "<br>";
+// echo "MYSQL_DATABASE: " . $_ENV["MYSQL_DATABASE"] . "<br>";
+
 
 mysqli_close($link);
 
