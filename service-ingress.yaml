@@ -1,0 +1,36 @@
+
+ # We need service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: simpleapp
+  labels:
+    app: simpleapp
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: simpleapp
+    tier: frontend
+  type: ClusterIP
+
+---
+
+ # We need an ingress
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: simpleapp
+spec:
+  rules:
+  - host: simpleapp.demo.wbitt.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: simpleapp
+          servicePort: 80
+
+
