@@ -1,26 +1,21 @@
 version: "3"
 services:
-  simple.demo.wbitt.com:
+  simpleapp.demo.wbitt.com:
     build: .
     labels:
-      # If you enable traefik.enabled=true, then make 100% sure that the names you provide 
-      # in host are actually pointing to the traefik server (web.witpass.co.uk).
       - traefik.enable=true
       - traefik.port=80
-      - traefik.frontend.rule=Host:simple.demo.wbitt.com
+      - traefik.frontend.rule=Host:simpleapp.demo.wbitt.com
     volumes:
       - ${PWD}/site.conf:/config/site.conf
 
     env_file:
-    - simple-site.env
+    - simpleapp.env
 
     networks:
-      # This uses the proxy-net / services-network
       - services-network
 
 networks:
-  # This 'services-network' network is created manually by:
-  # $ docker network create services-network 
   services-network:
     external: true
 
