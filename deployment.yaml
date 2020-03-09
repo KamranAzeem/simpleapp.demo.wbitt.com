@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simpleapp
+  labels:
+    app: simpleapp
+spec:
+  selector:
+    matchLabels:
+      app: simpleapp
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: simpleapp
+        tier: frontend
+    spec:
+      containers:
+      - name: simpleapp
+        image: kamranazeem/simpleapp:php-7-apache-2.4
+        imagePullPolicy: Always
+        env:
+        - name: MYSQL_HOST
+          valueFrom:
+            secretKeyRef:
+              name: simpleapp-credentials
+              key: MYSQL_HOST
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: simpleapp-credentials
+              key: MYSQL_DATABASE
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: simpleapp-credentials
+              key: MYSQL_USER
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: simpleapp-credentials
+              key: MYSQL_PASSWORD
+
+        ports:
+        - containerPort: 80
+
+        resources:
+          limits:
+            cpu: 10m
+            memory: 20Mi
+          requests:
+            cpu: 5m
+            memory: 10Mi
+
+        volumeMounts:
+        - mountPath: "/config/"
+          name: vol-simpleapp-conf
+
+      volumes:
+      - name: vol-simpleapp-conf
+        configMap:
+          name: configmap-simpleapp-conf
