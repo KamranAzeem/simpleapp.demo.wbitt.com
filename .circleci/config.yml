@@ -25,7 +25,8 @@ jobs:
           command: |
             echo $GCLOUD_CREDENTIALS > ${HOME}/gcloud-service-key.json
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
-            gcloud container clusters get-credentials docker-to-k8s --zone europe-north1-a --project trainingvideos
+            gcloud container clusters get-credentials docker-to-k8s-demo --zone europe-north1-a --project trainingvideos
+
       - checkout             
       - run: |
 
