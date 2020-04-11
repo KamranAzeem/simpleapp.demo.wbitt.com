@@ -6,7 +6,8 @@ echo '<h1>Simple PHP application! </h1>';
 
 echo "This file /script expects 'MYSQL_*'  ENV variables defined in the OS environment."  . PHP_EOL . "<br>";
 echo "If you have not defined them, then you will see errors below." . PHP_EOL . "<br>";
-echo "<br>";
+echo PHP_EOL . "<br>";
+echo PHP_EOL . "<br>";
 // Note: we are not defining any variables in this file. 
 // We are expecting them in the container's environment and we will just use them.
 // We can perform checks to see if any of the expected variables are empty.
