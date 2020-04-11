@@ -6,7 +6,7 @@ echo '<h1>Simple PHP application! </h1>';
 
 echo "This file /script expects 'MYSQL_*'  ENV variables defined in the OS environment."  . PHP_EOL . "<br>";
 echo "If you have not defined them, then you will see errors below." . PHP_EOL . "<br>";
-
+echo "<br>";
 // Note: we are not defining any variables in this file. 
 // We are expecting them in the container's environment and we will just use them.
 // We can perform checks to see if any of the expected variables are empty.
@@ -30,7 +30,7 @@ if (!$link) {
     exit;
 }
 
-echo "Success: Connected to MySQL server, using the credentials provided as MYSQL_* environment variables!" . PHP_EOL . "<br>";
+echo "<b>Success!</b> Connected to MySQL server, using the credentials provided as MYSQL_* environment variables!" . PHP_EOL . "<br>";
 echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL . "<br>";
 
 // Enable the following to show extra information on the web page:
